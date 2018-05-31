@@ -1,0 +1,6 @@
+{
+  "_comment": "Build with `packer build -var-file=java-8.json java-base.json`",
+  "image_name": "java-8",
+  "startup_script": "files/java/8.x/startup.txt",
+  "welcome_jar_location": "files/java/8.x/morpheus-welcome-all.jar"
+}

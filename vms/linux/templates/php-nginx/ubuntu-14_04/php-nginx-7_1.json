@@ -1,0 +1,5 @@
+{
+  "_comment": "Build with `packer build -var-file=php-nginx-7_1.json  php-nginx-base.json`",
+  "image_name": "php-nginx-7_1"
+}
+

@@ -1,0 +1,11 @@
+{
+  "_comment": "Build with `packer build -var-file=rabbitmq-3_6-amd64.json rabbitmq-base.json`",
+	"base_image": "ubuntu-14_04_5",
+  "erlang_download": "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb",
+	"image_arch": "amd64",
+  "image_name": "rabbitmq-3_6",
+	"iso_checksum": "5e567024c385cc8f90c83d6763c6e4f1cd5deb6f",
+	"iso_name": "ubuntu-14.04.5-server-amd64.iso",
+	"iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.5-server-amd64.iso",
+  "rabbitmq_download": "https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server_3.6.9-1_all.deb"
+}

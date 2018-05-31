@@ -1,0 +1,124 @@
+#!/bin/sh
+#
+# custom haproxy init.d script, by Mattias Geniar <mattias@nucleus.be>
+#
+# haproxy         starting and stopping the haproxy load balancer
+#
+# chkconfig: 345 55 45
+# description: haproxy is a TCP loadbalancer
+# probe: true
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ ${NETWORKING} = "no" ] && exit 0
+
+[ -f /usr/local/sbin/haproxy ] || exit 0
+
+[ -f /usr/local/etc/haproxy/haproxy.cfg ] || exit 0
+
+# Define our actions
+checkconfig() {
+	# Check the config file for errors
+	/usr/local/sbin/haproxy -c -q -f /usr/local/etc/haproxy/haproxy.cfg
+	if [ $? -ne 0 ]; then
+    		echo "Errors found in configuration file."
+    		return 1
+  	fi
+
+	# We're OK!
+	return 0
+}
+
+start() {
+	# Check config
+	/usr/local/sbin/haproxy -c -q -f /usr/local/etc/haproxy/haproxy.cfg
+        if [ $? -ne 0 ]; then
+                echo "Errors found in configuration file."
+                return 1
+        fi
+
+	echo -n "Starting HAProxy: "
+	daemon /usr/local/sbin/haproxy -D -f /usr/local/etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid
+
+	RETVAL=$?
+	echo
+  	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/haproxy
+  	return $RETVAL
+}
+
+stop() {
+	echo -n "Shutting down HAProxy: "
+  	killproc haproxy -USR1
+
+  	RETVAL=$?
+  	echo
+  	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/haproxy
+  	[ $RETVAL -eq 0 ] && rm -f /var/run/haproxy.pid
+  	return $RETVAL
+}
+
+restart() {
+	/usr/local/sbin/haproxy -c -q -f /usr/local/etc/haproxy/haproxy.cfg
+        if [ $? -ne 0 ]; then
+                echo "Errors found in configuration file."
+                return 1
+        fi
+
+	stop
+  	start
+}
+
+check() {
+  	/usr/local/sbin/haproxy -c -q -V -f /usr/local/etc/haproxy/haproxy.cfg
+}
+
+rhstatus() {
+  	status haproxy
+}
+
+reload() {
+	/usr/local/sbin/haproxy -c -q -f /usr/local/etc/haproxy/haproxy.cfg
+        if [ $? -ne 0 ]; then
+                echo "Errors found in configuration file."
+                return 1
+        fi
+
+	echo -n "Reloading HAProxy config: "
+	/usr/local/sbin/haproxy -f /usr/local/etc/haproxy/haproxy.cfg -p /var/run/haproxy.pid -sf $(cat /var/run/haproxy.pid)
+
+	success $"Reloading HAProxy config: "
+	echo
+}
+
+
+# Possible parameters
+case "$1" in
+  start)
+        start
+	;;
+  stop)
+	stop
+        ;;
+  status)
+        rhstatus
+        ;;
+  restart)
+	restart
+        ;;
+  reload)
+        reload
+        ;;
+  checkconfig)
+	check
+	;;
+  *)
+        echo "Usage: haproxy {start|stop|status|restart|reload|checkconfig}"
+        exit 1
+esac
+
+exit 0

@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=elasticsearch-2_4.json elasticsearch-base.json`",
+	"elastic_checksum": "cbc7b70abcd0fef9a4601502071510c919d95769",
+	"elastic_checksum_type": "sha1",
+	"elastic_download": "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.6/elasticsearch-2.4.6.deb",
+  "image_name": "elasticsearch-2_4",
+  "service_script": "files/elasticsearch/ubuntu/2.x/elasticsearch.conf"
+}

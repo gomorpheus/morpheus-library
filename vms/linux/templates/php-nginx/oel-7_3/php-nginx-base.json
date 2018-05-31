@@ -1,0 +1,394 @@
+{
+  "_comment": "Build with `packer build php-nginx-base.json`",
+  "variables": {
+    "base_image": "oel-7_3",
+    "cpus": "1",
+    "disk_size": "5120",
+    "headless": "true",
+    "hostname": "morpheus-php-nginx",
+    "iso_checksum": "130ee6cda827aa092b6eb66a145420f9801aa321",
+    "iso_checksum_type": "sha1",
+    "iso_directory": "{{env `PACKER_ISO_DIR`}}",
+    "iso_name": "oracle_linux_7-3_x86_64.iso",
+    "iso_path": "",
+    "iso_url": "",
+    "dracut_modules_download": "ftp://rpmfind.net/linux/epel/6/x86_64/dracut-modules-growroot-0.20-2.el6.noarch.rpm",
+    "python_pygment_download": "ftp://mandril.creatis.insa-lyon.fr/linux/centos/7.3.1611/os/x86_64/Packages/python-pygments-1.4-9.el7.noarch.rpm",
+    "epel_download": "https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
+    "kickstart": "oel/7/ks.cfg",
+    "kickstart_file": "oel/7/cloud_ks.cfg",
+    "kickstart_file_xen": "oel/7/xen_ks.cfg",
+    "memory": "512",
+    "morph_build_version": "v1",
+    "nfs_mount_path": "virtual",
+    "nfs_server_ip": "192.168.162.206",
+    "packer_artifacts_directory": "{{env `PACKER_ARTIFACTS_DIR`}}",
+    "ssh_wait_timeout": "40m",
+    "ssh_name": "cloud-user",
+    "ssh_pass": "m0rp#3us!",
+    "update": "true",
+    "ssh_name_amazon": "ec2-user",
+    "vagrant_ssh_name": "vagrant",
+    "vagrant_ssh_pass": "vagrant",
+    "virtualbox_guest_os_type": "Linux_64",
+    "vmware_guest_os_type": "rhel7-64",
+    "xen_iso_service_record": "",
+    "xen_nfs_service_record": "",
+    "xen_server_ip": "",
+    "xen_server_username": "",
+    "xen_server_password": "",
+    "vnc_bind_address": "0.0.0.0",
+    "vnc_disable_password": "true"
+  },
+  "builders": [
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<tab> <bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs> biosdevname=0 net.ifnames=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart_file` }}<enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": "{{ user `disk_size` }}",
+      "format": "raw",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "name": "kvm",
+      "output_directory": "{{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/kvm",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "sudo -S shutdown -P now",
+      "type": "qemu",
+      "vm_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}",
+      "vnc_bind_address": "{{ user `vnc_bind_address` }}"
+    },
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<tab> <bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs> biosdevname=0 net.ifnames=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart_file` }}<enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": "{{ user `disk_size` }}",
+      "format": "raw",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "name": "virtualbox-qemu",
+      "output_directory": "{{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox-qemu",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "sudo -S shutdown -P now",
+      "type": "qemu",
+      "vm_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}",
+      "vnc_bind_address": "{{ user `vnc_bind_address` }}"
+    },
+    {
+      "boot_command": [
+        "<tab><tab> <bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs> biosdevname=0 net.ifnames=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/oel/7/xen_ks.cfg <enter><wait>"
+      ],
+      "boot_wait": "30s",
+      "disk_size": "{{ user `disk_size` }}",
+      "format": "vdi_raw",
+      "http_directory": "http",
+      "iso_name": "{{ user `iso_name` }}",
+      "iso_sr": "{{ user `xen_iso_service_record` }}",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "name": "xen",
+      "nfs_mount": "{{ user `nfs_server_ip` }}:/{{ user `nfs_mount_path` }}",
+      "output_directory": "{{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/xen",
+      "remote_host": "{{ user `xen_server_ip` }}",
+      "remote_username": "{{ user `xen_server_username` }}",
+      "remote_password": "{{ user `xen_server_password` }}",
+      "script_url": "http://{{ .HTTPIP }}:{{ .HTTPPort }}/xen",
+      "shutdown_command": "",
+      "sr_name": "{{ user `xen_nfs_service_record` }}",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "type": "xenserver-iso",
+      "vm_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}"
+    },
+    {
+      "boot_command": [
+        "<tab> <bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs> biosdevname=0 net.ifnames=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart` }} noapic  <enter><wait>"
+      ],
+      "boot_wait": "30s",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_os_type": "{{ user `virtualbox_guest_os_type` }}",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "name": "virtualbox-vdi",
+      "output_directory": "{{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox-vdi",
+      "ssh_username": "{{user `vagrant_ssh_name`}}",
+      "ssh_password": "{{user `vagrant_ssh_pass`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "sudo -S shutdown -P now",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{ user `memory` }}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{ user `cpus` }}"
+        ]
+      ],
+      "vm_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}",
+      "vrdp_bind_address": "{{ user `vnc_bind_address` }}"
+    },
+    {
+      "boot_command": [
+        "<tab> <bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs> biosdevname=0 net.ifnames=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart_file` }}<enter><wait>"
+      ],
+      "boot_wait": "60s",
+      "disk_type_id": "0",
+      "disk_size": "{{ user `disk_size` }}",
+      "guest_os_type": "{{ user `vmware_guest_os_type` }}",
+      "headless": "{{user `headless`}}",
+      "http_directory": "http",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "name": "vmware",
+      "output_directory": "{{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/vmware",
+      "ssh_username": "{{user `ssh_name`}}",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "sudo -S shutdown -P now",
+      "tools_upload_flavor": "linux",
+      "type": "vmware-iso",
+      "vm_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}",
+      "vmdk_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}-disk1",
+      "vmx_data": {
+        "mainmem.backing": "swap",
+        "memsize": "{{ user `memory` }}",
+        "MemTrimRate": "0",
+        "numvcpus": "{{ user `cpus` }}",
+        "sched.mem.pshare.enable": "FALSE"
+      },
+      "vnc_bind_address": "{{ user `vnc_bind_address` }}",
+      "vnc_disable_password": "{{user `vnc_disable_password`}}"
+    },
+    {
+      "ami_name": "morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}",
+      "instance_type": "t2.micro",
+      "name": "amazon",
+      "region": "us-west-1",
+      "source_ami": "ami-74f5a014",
+      "ssh_username": "{{user `ssh_name_amazon`}}",
+      "type": "amazon-ebs"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "scripts/common/os_detect.sh",
+      "destination": "/tmp/os_detect.sh"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "EPEL_DOWNLOAD_URL={{user `epel_download`}}",
+        "PYTHON_PYGMENT_URL={{user `python_pygment_download`}}",
+        "DRACUT_DOWNLOAD_URL={{user `dracut_modules_download`}}",
+        "VAGRANT=false",
+        "UPDATE={{user `update`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/oel/common/setup.sh",
+      "pause_before": "30s",
+      "only": [
+        "virtualbox-qemu",
+        "vmware",
+        "amazon",
+        "kvm",
+        "xen"
+      ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "EPEL_DOWNLOAD_URL={{user `epel_download`}}",
+        "PYTHON_PYGMENT_URL={{user `python_pygment_download`}}",
+        "DRACUT_DOWNLOAD_URL={{user `dracut_modules_download`}}",
+        "VAGRANT=true",
+        "UPDATE={{user `update`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/oel/common/setup.sh",
+      "pause_before": "30s",
+      "only": [
+        "virtualbox-vdi"
+      ]
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "USER_HOME={{user `ssh_name`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/common/vmware_tools.sh",
+      "only": [
+        "vmware"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/common/virtualbox_tools.sh",
+      "only": [
+        "virtualbox-qemu"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "files/php-nginx/oel/nginx.conf",
+      "destination": "/tmp/nginx.conf"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "BUILD_NAME=morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}",
+        "GIT_HASH={{user `git_hash`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/morpheus-base/run.sh"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "PHP71_DOWNLOAD_URL={{user `php71_download`}}",
+        "EPEL_DOWNLOAD_URL={{user `epel_download`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/php-nginx/run.sh"
+    },
+    {
+       "type": "shell",
+       "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+       "scripts": [
+         "scripts/common/disable_network_manager.sh",
+         "scripts/common/prep_network_interface.sh",
+         "scripts/oel/common/cleanup.sh"
+       ]
+    },
+    {
+      "type": "shell-local",
+      "command": "mkdir -p {{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox/",
+      "only": [
+        "virtualbox-vdi",
+        "virtualbox-qemu"
+      ]
+    },
+    {
+      "type": "shell-local",
+      "command": "cp {{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox-vdi/morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}.vdi {{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox/",
+      "only": [
+        "virtualbox-vdi"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
+      "output": "{{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox/virtualbox-vdi/morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}_{{.Provider}}.box",
+      "only": [
+        "virtualbox-vdi"
+      ]
+    },
+    {
+      "type": "shell-local",
+      "environment_vars": [
+        "OUTPUT_BASE_DIR={{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox/",
+        "ARTIFACT_FILENAME=morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Script}}'",
+      "script": "scripts/common/post_process_virtualbox_vdi.sh",
+      "only": [
+        "virtualbox-vdi"
+      ]
+    },
+    {
+      "type": "shell-local",
+      "environment_vars": [
+        "OUTPUT_BASE_DIR={{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/virtualbox-qemu",
+        "ARTIFACT_FILENAME=morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Script}}'",
+      "script": "scripts/common/post_process_virtualbox_qemu.sh",
+      "only": [
+        "virtualbox-qemu"
+      ]
+    },
+    {
+      "type": "shell-local",
+      "environment_vars": [
+        "OUTPUT_BASE_DIR={{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/kvm",
+        "ARTIFACT_FILENAME=morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Script}}'",
+      "script": "scripts/common/post_process_kvm.sh",
+      "only": [
+        "kvm"
+      ]
+    },
+    {
+      "type": "shell-local",
+      "environment_vars": [
+        "OUTPUT_BASE_DIR={{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/xen",
+        "ARTIFACT_FILENAME=morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}"
+      ],
+      "execute_command": "{{.Vars}} sudo -S -E bash '{{.Script}}'",
+      "script": "scripts/common/post_process_xen.sh",
+      "only": [
+        "xen"
+      ]
+    },
+    {
+       "type": "shell-local",
+       "environment_vars": [
+         "OUTPUT_BASE_DIR={{user `packer_artifacts_directory`}}/{{user `image_name`}}-{{ user `morph_build_version` }}/{{user `base_image`}}/vmware",
+         "ARTIFACT_FILENAME=morpheus-{{user `image_name`}}-{{user `base_image`}}-{{user `morph_build_version`}}"
+       ],
+       "execute_command": "{{.Vars}} sudo -S -E bash '{{.Script}}'",
+       "script": "scripts/common/post_process_vmware.sh",
+       "only": [
+          "vmware"
+       ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+	"_comment": "Build with `packer build -var-file=ubuntu-16_04_3-i386.json ubuntu-base.json`",
+	"base_image": "ubuntu-16_04_3",
+	"image_arch": "i386",
+	"iso_checksum": "84f485aeea1aea81dded63ee78639d07edfd96e7",
+	"iso_name": "ubuntu-16.04.3-server-i386.iso",
+	"iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.3-server-i386.iso"
+}

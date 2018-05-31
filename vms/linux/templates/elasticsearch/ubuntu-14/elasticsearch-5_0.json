@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=elasticsearch-5_0.json elasticsearch-base.json`",
+	"elastic_checksum": "6f1588e7f7bcb0622a2a8bd70baf8c957fa4353f",
+	"elastic_checksum_type": "sha1",
+	"elastic_download": "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.2.deb",
+  "image_name": "elasticsearch-5_0",
+  "service_script": "files/elasticsearch/ubuntu/5.x/elasticsearch.conf"
+}

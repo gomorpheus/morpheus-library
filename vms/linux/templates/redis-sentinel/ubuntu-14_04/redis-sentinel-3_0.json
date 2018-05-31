@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=redis-sentinel-3_0.json redis-sentinel-base.json`",
+  "redis_checksum": "b2a791c4ea3bb7268795c45c6321ea5abcc24457178373e6a6e3be6372737f23",
+  "redis_checksum_type": "sha256",
+  "redis_download": "http://download.redis.io/releases/redis-3.0.7.tar.gz",
+  "image_name": "redis-sentinel-3_0"
+}
+

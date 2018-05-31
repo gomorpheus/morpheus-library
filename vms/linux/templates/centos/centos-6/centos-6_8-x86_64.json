@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=centos-6_8-x86_64.json centos-base.json`",
+  "base_image": "centos-6_8",
+  "iso_checksum": "d27cf37a40509c17ad70f37bc743f038c1feba00476fe6b69682aa424c399ea6",
+  "iso_name": "CentOS-6.8-x86_64-bin-DVD1.iso",
+  "iso_path": "CentOS-6.8-x86_64-bin-DVD1to2",
+  "iso_url": "http://archive.kernel.org/centos-vault/6.8/isos/x86_64/CentOS-6.8-x86_64-bin-DVD1.iso"
+}

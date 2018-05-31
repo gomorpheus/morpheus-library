@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=mysql-5_7.json mysql-base.json`",
+  "image_name": "mysql-5_7",
+  "files_upload_folder": "files/mysql/5.7/",
+  "morph_build_version": "v2",
+  "mysql_version": "mysql-5.7"
+}
+

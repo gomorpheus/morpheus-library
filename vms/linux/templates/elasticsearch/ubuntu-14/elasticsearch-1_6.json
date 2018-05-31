@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=elasticsearch-1_6.json elasticsearch-base.json`",
+  "elastic_checksum": "8e8b24a61cc14a5d0ae0defeab5ef78360e18268",
+  "elastic_checksum_type": "sha1",
+  "elastic_download": "https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.6.1.deb",
+  "image_name": "elasticsearch-1_6",
+  "service_script": "files/elasticsearch/ubuntu/1.x/elasticsearch.conf"
+}

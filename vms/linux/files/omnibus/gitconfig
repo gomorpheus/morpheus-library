@@ -1,0 +1,23 @@
+# Do NOT modify this file by hand.
+
+[user]
+  ; Set a sane user name and email. This makes git happy and prevents
+  ; spammy output on each git command.
+  name  = Omnibus
+  email = omnibus@chef.io
+[color]
+  ; Since this is a build machine, we do not want colored output.
+  ui = false
+[core]
+  editor = $EDITOR
+  whitespace = fix
+[apply]
+  whitespace = fix
+[push]
+  default = tracking
+[branch]
+  autosetuprebase = always
+[pull]
+  rebase = preserve
+[http]
+  sslCAinfo = /opt/omnibus-toolchain/embedded/ssl/certs/cacert.pem

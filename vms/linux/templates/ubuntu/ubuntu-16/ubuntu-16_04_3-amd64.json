@@ -1,0 +1,8 @@
+{
+	"_comment": "Build with `packer build -var-file=ubuntu-16_04_3-amd64.json ubuntu-base.json`",
+	"base_image": "ubuntu-16_04_4",
+	"image_arch": "amd64",
+	"iso_checksum": "ee834fbeb94cc55972b38caafa2029c29625e2e8",
+	"iso_name": "ubuntu-16.04.4-server-amd64.iso",
+	"iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.4-server-amd64.iso"
+}

@@ -1,0 +1,9 @@
+{
+  "_comment": "Build with `packer build -var-file=elasticsearch-5_6-amd64.json elasticsearch-base.json`",
+	"elastic_checksum": "a86976e14874244d58f45f31cd95259404a04d33928c33ead3e1d40a082b7186d9dda65bdad7f69544233efddec7c3df40b65fa42413ddf94d64bf5d315f1398",
+	"elastic_checksum_type": "sha512",
+	"elastic_download": "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.7.deb",
+	"image_arch": "amd64",
+  "image_name": "elasticsearch-5_6",
+  "service_script": "files/elasticsearch/ubuntu/5.x/elasticsearch.conf"
+}

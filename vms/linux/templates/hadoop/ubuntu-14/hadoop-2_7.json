@@ -1,0 +1,7 @@
+{
+  "_comment": "Build with `packer build -var-file=hadoop-2_7.json hadoop-base.json`",
+  "hadoop_checksum": "991dc34ea42a80b236ca46ff5d207107bcc844174df0441777248fdb6d8c9aa0",
+  "hadoop_checksum_type": "sha256",
+  "hadoop_download": "https://archive.apache.org/dist/hadoop/core/hadoop-2.7.1/hadoop-2.7.1.tar.gz",
+  "image_name": "hadoop-2_7"
+}

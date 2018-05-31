@@ -1,0 +1,151 @@
+{
+  "builders":[
+    {
+      "type":"virtualbox-iso",
+      "vm_name":"windows-2012_r2",
+      "output_directory":"output/windows-2012_r2/virtualbox",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "iso_checksum":"{{ user `iso_checksum` }}",
+      "iso_checksum_type":"{{user `iso_checksum_type`}}",
+      "headless": "{{user `headless`}}",
+      "communicator":"winrm",
+      "guest_os_type":"Windows2012_64",
+      "disk_size":16384,
+      "winrm_username":"morpheus",
+      "winrm_password":"m0rp#3us",
+      "winrm_timeout":"8h",
+      "winrm_port":5985,
+      "shutdown_command":"shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout":"15m",
+      "guest_additions_mode":"upload",
+      "guest_additions_path":"C:/users/morpheus/VBoxGuestAdditions.iso",
+      "vboxmanage":[
+        [ "modifyvm", "{{.Name}}", "--natpf1", "guest_winrm,tcp,,55985,,5985" ],
+        [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+        [ "modifyvm", "{{.Name}}", "--vram", "48" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
+      ],
+      "floppy_files":[
+        "answer-files/windows-2012_r2/Autounattend.xml",
+        "scripts/windows-2012_r2/oracle.cer",
+        "scripts/windows-2012_r2/bootstrap.ps1",
+        "scripts/windows-2012_r2/boxstarter.ps1",
+        "scripts/windows-2012_r2/package.ps1",
+        "scripts/windows-2012_r2/cloudbase.ps1",
+        "scripts/windows-2012_r2/testCommand.ps1",
+        "files/windows-2012_r2/unattend.xml",
+        "files/windows-2012_r2/cloudbase-init.conf"
+      ],
+      "vrdp_bind_address": "{{ user `vnc_bind_address` }}"
+    }, {
+      "type":"vmware-iso",
+      "vm_name":"windows-2012_r2",
+      "output_directory":"output/windows-2012_r2/vmware",
+      "iso_urls": [
+        "{{ user `iso_directory` }}/{{ user `iso_path` }}/{{ user `iso_name` }}",
+        "{{ user `iso_directory` }}/{{ user `iso_name` }}",
+        "{{ user `iso_url` }}"
+      ],
+      "iso_checksum_type":"{{user `iso_checksum_type`}}",
+      "iso_checksum":"{{user `iso_checksum`}}",
+      "headless": "{{user `headless`}}",
+      "communicator":"winrm",
+      "guest_os_type":"windows8srv-64",
+      "disk_size":16384,
+      "disk_type_id":"0",
+      "winrm_username":"morpheus",
+      "winrm_password":"m0rp#3us",
+      "winrm_timeout":"8h",
+      "winrm_port":5985,
+      "shutdown_command":"shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout":"15m",
+      "tools_upload_flavor":"windows",
+      "tools_upload_path":"C:/Windows/Temp/windows.iso",
+      "floppy_files":[
+        "answer-files/windows-2012_r2/Autounattend.xml",
+        "scripts/windows-2012_r2/oracle.cer",
+        "scripts/windows-2012_r2/bootstrap.ps1",
+        "scripts/windows-2012_r2/boxstarter.ps1",
+        "scripts/windows-2012_r2/package.ps1",
+        "scripts/windows-2012_r2/cloudbase.ps1",
+        "scripts/windows-2012_r2/testCommand.ps1",
+        "files/windows-2012_r2/unattend.xml",
+        "files/windows-2012_r2/cloudbase-init.conf"
+      ],
+      "vmx_data":{
+        "memsize":"2048",
+        "numvcpus":"1",
+        "scsi0.virtualDev":"lsisas1068"
+      },
+      "vnc_bind_address": "{{ user `vnc_bind_address` }}",
+      "vnc_disable_password": "{{user `vnc_disable_password`}}"
+    },
+    {
+      "type": "qemu",
+      "vm_name": "windows-2012_r2",
+      "output_directory": "output/windows-2012_r2/kvm",
+      "accelerator": "kvm",
+      "iso_url":"{{user `iso_url`}}",
+      "iso_checksum_type":"{{user `iso_checksum_type`}}",
+      "iso_checksum":"{{user `iso_checksum`}}",
+      "headless": "{{user `headless`}}",
+      "communicator":"winrm",
+      "disk_size":16384,
+      "disk_interface": "virtio",
+      "format": "qcow2",
+      "winrm_username":"morpheus",
+      "winrm_password":"m0rp#3us",
+      "winrm_timeout":"8h",
+      "winrm_port":5985,
+      "shutdown_command":"shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout":"15m",
+      "floppy_files":[
+        "files/drivers/virtio-win-0.1-81/WIN7/AMD64/*",
+        "answer-files/windows-2012_r2/Autounattend.xml",
+        "scripts/windows-2012_r2/oracle.cer",
+        "scripts/windows-2012_r2/bootstrap.ps1",
+        "scripts/windows-2012_r2/boxstarter.ps1",
+        "scripts/windows-2012_r2/package.ps1",
+        "scripts/windows-2012_r2/cloudbase.ps1",
+        "scripts/windows-2012_r2/testCommand.ps1",
+        "files/windows-2012_r2/unattend.xml",
+        "files/windows-2012_r2/cloudbase-init.conf"
+      ]
+    }
+  ],
+  "provisioners":[
+    {
+      "type":"powershell",
+      "remote_path": "C:/Windows/Temp/vmwareTools.ps1",
+      "script":"scripts/windows-2012_r2/vmwareTools.ps1"
+    },
+    {
+      "type":"powershell",
+      "remote_path": "C:/Windows/Temp/provision.ps1",
+      "script":"scripts/windows-2012_r2/provision.ps1"
+    }
+  ],
+  "post-processors":[
+    {
+      "type":"vagrant",
+      "keep_input_artifact":true,
+      "output":"output/windows-2012_r2/vagrant/windows-2012_r2_{{.Provider}}.box",
+      "vagrantfile_template":"templates/windows-2012_r2/vagrantfile-windows-2012_r2.template"
+    }
+  ],
+  "variables":{
+    "headless": "true",
+    "iso_url": "http://download.microsoft.com/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO",
+    "iso_checksum": "458ff91f8abc21b75cb544744bf92e6a",
+    "iso_checksum_type": "md5",
+    "iso_directory": "{{env `PACKER_ISO_DIR`}}",
+    "iso_name": "9600.16384.WINBLUE_RTM.130821-1623_X64FRE_SERVER_EVAL_EN-US-IRM_SSS_X64FREE_EN-US_DV5.ISO",
+    "iso_path": "",
+    "vnc_bind_address": "0.0.0.0",
+    "vnc_disable_password": "true"
+  }
+}

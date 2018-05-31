@@ -1,0 +1,12 @@
+[Unit]
+Description=Tomcat Server
+
+[Service]
+User=morpheus-node
+Group=morpheus-node
+Restart=on-failure
+ExecStart=/entrypoint.sh
+ExecStopPost=rm -rf /usr/local/tomcat/temp/*
+
+[Install]
+WantedBy=multi-user.target

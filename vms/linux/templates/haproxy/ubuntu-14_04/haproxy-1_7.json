@@ -1,0 +1,7 @@
+{
+  "_comment": "Build with `packer build -var-file=haproxy-1_7.json haproxy-base.json`",
+	"haproxy_checksum": "b04d7db6383c662eb0a421a95af7becac6d9744a1abf0df6b0280c1e61416121",
+	"haproxy_checksum_type": "sha256",
+	"haproxy_download": "http://www.haproxy.org/download/1.7/src/haproxy-1.7.5.tar.gz",
+  "image_name": "haproxy-1_7"
+}

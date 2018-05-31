@@ -1,0 +1,8 @@
+{
+  "_comment": "Build with `packer build -var-file=tomcat-8_5.json tomcat-base.json`",
+	"tomcat_checksum": "0a5db37147b4874e378417628514662d16f23f1f79659297b3526ba57e7facd0",
+	"tomcat_checksum_type": "sha256",
+  "tomcat_download": "https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz",
+  "image_name": "tomcat-8_5"
+}
+

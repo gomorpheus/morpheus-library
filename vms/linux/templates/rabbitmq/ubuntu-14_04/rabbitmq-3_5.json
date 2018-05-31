@@ -1,0 +1,6 @@
+{
+  "_comment": "Build with `packer build -var-file=rabbitmq-3_5.json rabbitmq-base.json`",
+  "erlang_download": "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb",
+  "rabbitmq_download": "https://www.rabbitmq.com/releases/rabbitmq-server/v3.5.7/rabbitmq-server_3.5.7-1_all.deb",
+  "image_name": "rabbitmq-3_5"
+}

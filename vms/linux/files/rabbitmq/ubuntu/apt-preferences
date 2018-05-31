@@ -1,0 +1,8 @@
+# /etc/apt/preferences.d/erlang
+Package: erlang*
+Pin: version 1:19.3-1
+Pin-Priority: 1000
+
+Package: esl-erlang
+Pin: version 1:19.3.6
+Pin-Priority: 1000

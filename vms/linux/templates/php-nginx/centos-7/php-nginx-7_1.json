@@ -1,0 +1,6 @@
+{
+  "_comment": "Build with `packer build -var-file=php-nginx-7_1.json  php-nginx-base.json`",
+  "php71_download": "http://rpms.famillecollet.com/enterprise/remi-release-7.rpm",
+  "image_name": "php-nginx-7_1"
+}
+
