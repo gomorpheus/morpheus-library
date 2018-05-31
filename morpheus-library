@@ -1,0 +1,79 @@
+#!/usr/bin/env groovy
+
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+def cli = new groovy.cli.picocli.CliBuilder(name: 'morpheus-library')
+cli.usageMessage.with {
+    
+    header($/@|bold,cyan \
+    __  ___              __              
+  /  |/  /__  _______  / /  ___ __ _____
+ / /|_/ / _ \/ __/ _ \/ _ \/ -_) // (_-<
+/_/  /_/\___/_/ / .__/_//_/\__/\_,_/___/
+
+Morpheus Packer Build Utility (Template Merger)
+|@/$)
+    synopsisHeading("@|bold,underline Usage|@: ")
+    // descriptionHeading("%n@|bold,underline Description heading|@:%n")
+    // description("Description 1", "Description 2")      // after the synopsis
+    optionListHeading("%n@|bold,underline Options|@:%n")
+
+}
+cli.template(type: List, 'pass multiple template files to be merged for a final template file and kick off a packer build')
+cli.base(type:String, 'The working path where packer will run from')
+def options = cli.parse(args)
+def workingPath = options.base ?: "vms/linux"
+if(!options.templates) {
+	cli.usage()	
+} else {
+	Map jsonMap = [:]
+	for(String template in options.templates) {
+		def file = new File(template)
+		if(!file.exists()) {
+			println "Error: Template File Not Found!: ${template}"
+			return 1
+		} else {
+			def json = new JsonSlurper().parseText(file.text)
+			if(!jsonMap) {
+				jsonMap = json
+			} else {
+				packerMerge(jsonMap,json)
+			}
+		}
+	}
+
+	def output = new File("template.json")
+	if(!output.exists()) {
+		output.createNewFile()
+	}
+	def os = output.newOutputStream()
+	os << JsonOutput.prettyPrint(JsonOutput.toJson(jsonMap))
+	os.flush()
+	os.close()
+
+	
+	def command = ["packer","build"] + options.arguments() + [output.canonicalPath]
+	def proc = command.execute(null, new File(workingPath))
+	proc.consumeProcessOutput(System.out, System.err)
+	proc.waitFor()
+}
+
+def packerMerge(Map sourceMap, Map newMap) {
+	if(sourceMap.variables && newMap.variables) {
+		sourceMap.variables += newMap.variables
+	} else if(newMap.variables) {
+		sourceMap.variables = newMap.variables
+	}
+	if(sourceMap.provisioners && newMap.provisioners) {
+		sourceMap.provisioners += newMap.provisioners
+		
+	} else if (newMap.provisioners) {
+		sourceMap.provisioners = newMap.provisioners
+	}
+
+	if(sourceMap.provisioners?.find{it.order}) { 
+		//order property exists, we should sort
+		sourceMap.provisioners = sourceMap.provisioners.sort{a,b -> a.order <=> b.order}
+	}
+}
