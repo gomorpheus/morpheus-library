@@ -22,8 +22,11 @@ Morpheus Packer Build Utility (Template Merger)
 }
 cli.template(type: List, 'pass multiple template files to be merged for a final template file and kick off a packer build')
 cli.base(type:String, 'The working path where packer will run from')
+cli.sudo(type:Boolean, 'Call packer via sudo')
+cli."var-file"(type:List, 'Var-File Path... converted to base path if needed')
+
 def options = cli.parse(args)
-def workingPath = options.base ?: "vms/linux"
+def workingPath = options.base ?: "."
 if(!options.templates) {
 	cli.usage()	
 } else {
@@ -53,7 +56,21 @@ if(!options.templates) {
 	os.close()
 
 	
-	def command = ["packer","build"] + options.arguments() + [output.canonicalPath]
+	def command = ["packer","build"] + options.arguments()
+	if(options."var-files") {
+		options."var-files".each { varFile ->
+			def file = new File(varFile)
+			if(!file.exists()) {
+				command += ["-var-file",varFile]
+			} else {
+				command += ["-var-file",file.canonicalPath]
+			}
+		}
+	}
+	command +=  [output.canonicalPath]
+	if(options.sudo) {
+		command = ["sudo"] + command
+	}
 	def proc = command.execute(null, new File(workingPath))
 	proc.consumeProcessOutput(System.out, System.err)
 	proc.waitFor()
