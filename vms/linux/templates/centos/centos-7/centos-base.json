@@ -13,7 +13,7 @@
       "iso_directory": "{{env `PACKER_ISO_DIR`}}",
       "iso_name": "CentOS-7-x86_64-DVD-1804.iso",
       "iso_path": "",
-      "iso_url": "http://buildlogs.centos.org/rolling/7/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso",
+      "iso_url": "http://mirror.sesp.northwestern.edu/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso",
       "kickstart_file": "centos/7/cloud_ks.cfg",
       "kickstart": "centos/7/ks.cfg",
       "kickstart_file_xen": "centos/7/xen_ks.cfg",
