@@ -1,0 +1,5 @@
+{
+  "_comment": "Build with `packer build -var-file=centos-7_5-x86_64.json centos-base.json`",
+	"base_image": "centos-7_5",
+	"image_arch": "x86_64"
+}
