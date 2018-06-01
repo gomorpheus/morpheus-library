@@ -1,0 +1,8 @@
+{
+	"_comment": "Build with `packer build -var-file=ubuntu-18_04-amd64.json ubuntu-base.json`",
+	"base_image": "ubuntu-18_04",
+	"image_arch": "amd64",
+	"iso_checksum": "0b3490de9839c3918e35f01aa8a05c9ae286fc94",
+	"iso_name": "ubuntu-18.04-live-server-amd64.iso",
+	"iso_url": "http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso"
+}
