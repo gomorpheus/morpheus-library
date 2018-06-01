@@ -328,6 +328,11 @@
 	 {
 		"type": "shell",
 		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+		"script": "scripts/common/prep_network_interface.sh"
+	 },
+	 {
+		"type": "shell",
+		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
 		"script": "scripts/ubuntu/common/cleanup.sh"
 	 },
 	 {
