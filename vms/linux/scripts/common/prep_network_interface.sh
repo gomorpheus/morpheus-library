@@ -4,7 +4,14 @@ set -e
 verifyEth0Exists(){
 	case "$OS_RELEASE" in
 		ubuntu)
-			if [[ ${OS_VERSION%.*} > 14 ]]; then
+			if [[ ${OS_VERSION%.*} > 17 ]]; then
+				echo "Ubuntu 18 Detected ... Switching to netplan configuration fix..."
+				sed -i -e "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/" /etc/default/grub
+				echo "New Grub Config Generated"
+				cat /etc/default/grub
+				grub-mkconfig -o /boot/grub/grub.cfg
+				sed -i -e 's/en[0-9a-zA-Z]*/eth0/' /etc/netplan/01-netcfg.yaml
+			elif [[ ${OS_VERSION%.*} > 14 ]]; then
 				sed -i -e "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/" /etc/default/grub
 				grub-mkconfig -o /boot/grub/grub.cfg
 				sed -i -e 's/en[0-9a-zA-Z]*/eth0/' /etc/network/interfaces
