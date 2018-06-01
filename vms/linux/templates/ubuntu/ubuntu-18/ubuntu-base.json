@@ -311,6 +311,14 @@
 	 {
 		"type": "shell",
 		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+		"script": "scripts/common/kvm_tools.sh",
+		"only": [
+			"kvm"
+		]
+	 },
+	 {
+		"type": "shell",
+		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
 		"script": "scripts/common/virtualbox_tools.sh",
 		"only": [
 			"virtualbox-qemu"
