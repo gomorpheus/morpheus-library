@@ -55,7 +55,7 @@
 	        "debconf/frontend=noninteractive <wait>",
 	        "console-setup/ask_detect=false <wait>",
 	        "console-keymaps-at/keymap=us <wait>",
-	        "grub-installer/bootdev=/dev/sda <wait>",
+	        "grub-installer/bootdev=/dev/vda <wait>",
 			"<enter><wait>"
 		],
 		"boot_wait": "5s",
@@ -203,7 +203,7 @@
 	        "debconf/frontend=noninteractive <wait>",
 	        "console-setup/ask_detect=false <wait>",
 	        "console-keymaps-at/keymap=us <wait>",
-	        "grub-installer/bootdev=/dev/sda <wait>",
+	        "grub-installer/bootdev=/dev/vda <wait>",
 			"<enter><wait>"
 		],
 		"boot_wait": "5s",
