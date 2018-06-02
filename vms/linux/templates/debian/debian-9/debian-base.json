@@ -1,7 +1,7 @@
 {
 	"_comment": "Build with `packer build debian-base.json`",
 	"variables": {
-		"base_image": "debian-9",
+		"base_image": "debian-9_4",
 		"cpus": "1",
 		"disk_size": "5120",
 		"headless": "true",
