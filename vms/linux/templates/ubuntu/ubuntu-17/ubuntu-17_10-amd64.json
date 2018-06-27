@@ -4,5 +4,5 @@
 	"image_arch": "amd64",
 	"iso_checksum": "8c1ff8a105460022a7a362c1c98a5ebc24bc7a9a",
 	"iso_name": "ubuntu-17.10-server-amd64.iso",
-	"iso_url": "http://releases.ubuntu.com/17.10/ubuntu-17.10-server-amd64.iso"
+	"iso_url": "http://old-releases.ubuntu.com/releases/17.10/ubuntu-17.10-server-amd64.iso"
 }
