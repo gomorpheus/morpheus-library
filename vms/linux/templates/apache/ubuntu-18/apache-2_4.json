@@ -1,0 +1,11 @@
+{
+  "_comment": "Build with `packer build -var-file=apache-2_4.json apache-base.json`",
+  "apache_checksum": "d72234baa373234aa9ed78e8331ac1ce47d2e07a262dafce35d17389825bc8b7",
+  "apache_checksum_type": "sha256",
+  "apache_download": "https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin/apache-tomcat-8.5.9.tar.gz",
+ 	"base_image": "ubuntu-18_04",
+  "image_name": "apache-2_4",
+	"iso_checksum": "73ae6579ef7c51d944a0be5c4c48f748bfd689df",
+	"iso_name": "ubuntu-18.04-server-amd64.iso",
+	"iso_url": "http://cdimage.ubuntu.com/ubuntu/releases/18.04/release/ubuntu-18.04-server-amd64.iso"
+}
