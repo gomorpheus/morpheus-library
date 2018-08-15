@@ -46,7 +46,7 @@ done
 
 touch /var/log/wtmp
 touch /var/log/lastlog
-
+echo manual | sudo tee /etc/init/ureadahead.override
 set +e
 # Zero out the rest of the free space using dd, then delete the written file.
 /sbin/swapoff -a
