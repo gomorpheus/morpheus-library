@@ -3,5 +3,5 @@
 	"base_image": "centos-7_5",
   "iso_checksum": "506e4e06abf778c3435b4e5745df13e79ebfc86565d7ea1e128067ef6b5a6345",
 	"image_arch": "x86_64",
-  "iso_url": "http://mirror.sesp.northwestern.edu/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso"
+  "iso_url": "http://archive.kernel.org/centos-vault/7.5.1804/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso"
 }
