@@ -22,6 +22,7 @@ verifyEth0Exists(){
 			sed -i -e "s/GRUB_CMDLINE_LINUX=\"\([^\"]*\)\"/GRUB_CMDLINE_LINUX=\"\1 net.ifnames=0 biosdevname=0\"/" /etc/default/grub
 			grub-mkconfig -o /boot/grub/grub.cfg
 			sed -i -e 's/en[0-9a-zA-Z]*/eth0/' /etc/network/interfaces
+			sed -i -e '/^.*eth0.*$/d' /etc/network/interfaces
 		;;
 
 		centos|rhel|ol)
