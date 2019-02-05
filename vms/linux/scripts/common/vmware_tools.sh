@@ -9,12 +9,14 @@ fi
 
 case "$OS_RELEASE" in
   ubuntu)
-		if [[ "$OS_VERSION" =~ ^17 ]]; then
-			apt-get -y install open-vm-tools
-			exit 0
-		else 
+		# if [[ "$OS_VERSION" =~ ^17 ]]; then
+			
+		# 	exit 0
+		# else
+		apt-get -y install open-vm-tools 
 	  	apt-get -y install dkms
 	   	apt-get -y install nfs-common
+	   	exit 0
 	  fi
 	  ;;
 
