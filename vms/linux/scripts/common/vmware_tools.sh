@@ -17,7 +17,6 @@ case "$OS_RELEASE" in
 	  	apt-get -y install dkms
 	   	apt-get -y install nfs-common
 	   	exit 0
-	  fi
 	  ;;
 
   centos|rhel|ol)
