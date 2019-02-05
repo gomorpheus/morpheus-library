@@ -294,7 +294,18 @@
 		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
 		"script": "scripts/common/vmware_tools.sh",
 		"only": [
-			"vmware"
+			"vmware","kvm"
+		]
+	 },
+	 {
+		"type": "shell",
+		"environment_vars": [
+			"USER_HOME={{user `ssh_name`}}"
+		],
+		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+		"script": "scripts/common/xen_tools.sh",
+		"only": [
+			"xen","kvm"
 		]
 	 },
 	 {
