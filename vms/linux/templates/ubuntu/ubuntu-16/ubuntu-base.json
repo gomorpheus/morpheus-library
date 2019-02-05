@@ -305,7 +305,7 @@
 		"execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
 		"script": "scripts/common/xen_tools.sh",
 		"only": [
-			"xen","kvm"
+			"xen"
 		]
 	 },
 	 {
