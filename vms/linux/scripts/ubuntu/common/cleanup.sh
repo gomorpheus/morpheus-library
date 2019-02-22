@@ -52,6 +52,9 @@ set +e
 /sbin/swapoff -a
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
-
+# Clear Machine Id for ubuntu 18 bug
+if [[ ${OS_VERSION%.*} > 17 ]]; then
+truncate -s 0 /etc/machine-id
+fi
 # Add `sync` so Packer doesn't quit too early, before the large file is deleted.
 sync
