@@ -20,7 +20,8 @@ case "$OS_RELEASE" in
 	  ;;
 
   centos|rhel|ol)
-  	yum install dkms nfs-utils -y
+  	yum install dkms nfs-utils open-vm-tools -y
+  	exit 0
    	;;
 
   *)
