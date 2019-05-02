@@ -2,7 +2,7 @@
 	"_comment": "Build with `packer build -var-file=ubuntu-16_04_5-amd64.json ubuntu-base.json`",
 	"base_image": "ubuntu-16_04_5",
 	"image_arch": "amd64",
-	"iso_checksum": "ee32c555567dd5407c58a1cfc7e668ab37a99d99",
+	"iso_checksum": "c94de1cc2e10160f325eb54638a5b5aa38f181d60ee33dae9578d96d932ee5f8",
 	"iso_name": "ubuntu-16.04.5-server-amd64.iso",
-	"iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.5-server-amd64.iso"
+	"iso_url": "http://old-releases.ubuntu.com/releases/16.04.5/ubuntu-16.04.5-server-amd64.iso"
 }
