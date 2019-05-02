@@ -72,6 +72,8 @@ else
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-16_04_5" = $BASE_IMAGE ]]; then
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
+	elif [[ "ubuntu-16_04_6" = $BASE_IMAGE ]]; then
+		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-17_10_1" = $BASE_IMAGE ]]; then
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	fi
@@ -84,6 +86,8 @@ else
 		elif [[ "ubuntu-16_04_3" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "ubuntu-16_04_5" = $BASE_IMAGE ]]; then
+			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
+		elif [[ "ubuntu-16_04_6" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "ubuntu-17_10_1" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
