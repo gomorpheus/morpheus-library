@@ -1,8 +1,10 @@
 #!/bin/bash
 
-baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-17_10_1-amd64 windows-2012_r2)
+#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_5 amd64 ubuntu 16_04_5 v1 1
+
+baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-17_10_1-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
-ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-17_10_1-amd64)
+ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-17_10_1-amd64)
 centosbases=(centos-6_8 centos-6_9 centos-7_2 centos-7_3)
 oraclebases=(oel-7_3)
 redhatbases=(rhel-7_2 rhel-7_3)
@@ -67,6 +69,8 @@ else
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-16_04_3" = $BASE_IMAGE ]]; then
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
+	elif [[ "ubuntu-16_04_5" = $BASE_IMAGE ]]; then
+		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-17_10_1" = $BASE_IMAGE ]]; then
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	fi
@@ -77,6 +81,8 @@ else
 		if [[ "ubuntu-14_04_5" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "ubuntu-16_04_3" = $BASE_IMAGE ]]; then
+			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
+		elif [[ "ubuntu-16_04_5" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "ubuntu-17_10_1" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
@@ -195,7 +201,7 @@ else
 	ORIGINAL_DIR=$(pwd)
 	echo "original directory: $ORIGINAL_DIR"
 
-	cd $PACKER_TEMPLATE_DIR/..
+	cd $PACKER_TEMPLATE_DIR/../..
 	GIT_DIR=$(pwd)
 	echo "GIT_DIR: $GIT_DIR"
 	GIT_HASH=$(git --git-dir=$GIT_DIR/.git/ log -n 1 --pretty=format:"%H")
@@ -232,9 +238,12 @@ else
 		PACKER_LOG=1 $GOPATH/bin/packer build -only=$BUILDER -var "git_hash=$GIT_HASH" -var "morph_build_version=$MORPH_BUILD_VERSION" -var "base_image=$BASE_IMAGE" -var "image_arch=$ARCH" -var-file=$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json
 
 	elif [[ $BUILDER == "virtualbox-vdi" ]]; then
-		echo "$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json"
-
-		PACKER_LOG=1 packer build -parallel=false -only=virtualbox-vdi -var "git_hash=$GIT_HASH" -var "morph_build_version=$MORPH_BUILD_VERSION" -var "base_image=$BASE_IMAGE" -var "image_arch=$ARCH" -var-file=$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json
+#		echo "$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json"
+#		PACKER_LOG=1 packer build -parallel=false -only=virtualbox-vdi -var "git_hash=$GIT_HASH" -var "morph_build_version=$MORPH_BUILD_VERSION" -var "base_image=$BASE_IMAGE" -var "image_arch=$ARCH" -var-file=$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json
+		packerCmd="groovy ../../morpheus-library -template=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json -var-file=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json -only=virtualbox-vdi"
+		echo "packerCmd = $packerCmd"
+#		groovy ../../morpheus-library -template=templates/ubuntu/ubuntu-16/ubuntu-base.json -var-file=templates/ubuntu/ubuntu-16/ubuntu-16_04_5-amd64.json -only=virtualbox-vdi
+		eval $packerCmd
 
 	elif [[ $BUILDER == "ovm" ]]; then
 
