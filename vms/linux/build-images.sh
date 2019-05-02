@@ -1,10 +1,11 @@
 #!/bin/bash
 
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_5 amd64 ubuntu 16_04_5 v1 1
+#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
 
-baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-17_10_1-amd64 windows-2012_r2)
+baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
-ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-17_10_1-amd64)
+ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16 ubuntu-16_04_3-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64)
 centosbases=(centos-6_8 centos-6_9 centos-7_2 centos-7_3)
 oraclebases=(oel-7_3)
 redhatbases=(rhel-7_2 rhel-7_3)
