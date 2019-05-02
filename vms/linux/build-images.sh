@@ -1,11 +1,13 @@
 #!/bin/bash
 
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
+#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 i386 ubuntu 16_04_6 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-18_04_2 amd64 ubuntu 18_04_2 v1 1
+#	Base image example: ./build-images.sh virtualbox-vdi centos-7_5 x86_64 centos 7_5 v1 1
 
 #	Base image example: ./build-images.sh vmware ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
 
-#	Basic image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 apache 2_4 v1
+#	Basic image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 apache 2_4 v1
 
 baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
