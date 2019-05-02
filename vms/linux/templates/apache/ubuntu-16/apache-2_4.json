@@ -1,0 +1,11 @@
+{
+  "_comment": "Build with `packer build -var-file=apache-2_4.json apache-base.json`",
+  "apache_checksum": "d72234baa373234aa9ed78e8331ac1ce47d2e07a262dafce35d17389825bc8b7",
+  "apache_checksum_type": "sha256",
+  "apache_download": "https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.9/bin/apache-tomcat-8.5.9.tar.gz",
+ 	"base_image": "ubuntu-16_04_6",
+  "image_name": "apache-2_4",
+	"iso_checksum": "16afb1375372c57471ea5e29803a89a5a6bd1f6aabea2e5e34ac1ab7eb9786ac",
+	"iso_name": "ubuntu-16.04.6-server-amd64.iso",
+	"iso_url": "http://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-amd64.iso"
+}
