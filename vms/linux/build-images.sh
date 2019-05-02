@@ -279,6 +279,6 @@ else
 	fi
 
 	echo "packer build done"
-
+	echo "ORIGINAL_DIR: $ORIGINAL_DIR"
 	cd "$ORIGINAL_DIR"
 fi
