@@ -78,7 +78,7 @@
 	 },
 	 {
 		"boot_command": [
-			"<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+			"<enter><wait10><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 			"<wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 			"<wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 			"<wait><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -90,7 +90,7 @@
 			"fb=false debconf/frontend=noninteractive<wait> ",
 			"keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA<wait> ",
 			"keyboard-configuration/variant=USA console-setup/ask_detect=false<wait> ",
-			"initrd=/install/initrd.gz<wait> -- <enter>"
+			"initrd=/install/initrd.gz -- <enter>"
 		],
 		"disk_size": "{{user `disk_size`}}",
 		"guest_os_type": "{{user `virtualbox_guest_os_type`}}",
