@@ -283,7 +283,7 @@ else
 #		echo "$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json"
 #		PACKER_LOG=1 packer build -parallel=false -only=virtualbox-vdi -var "git_hash=$GIT_HASH" -var "morph_build_version=$MORPH_BUILD_VERSION" -var "base_image=$BASE_IMAGE" -var "image_arch=$ARCH" -var-file=$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json
 		
-		packerCmd="groovy ../../morpheus-library -template=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json -var-file=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json -only=virtualbox-vdi -parallel=false -var \"git_hash=$GIT_HASH\""
+		packerCmd="groovy ../../morpheus-library -template=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json -var-file=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json -only=virtualbox-vdi -parallel=false -var \"git_hash=$GIT_HASH\" -debug"
 		echo "packerCmd = $packerCmd"
 		eval $packerCmd
 

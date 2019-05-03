@@ -71,6 +71,7 @@ if(!options.templates) {
 	if(options.sudo) {
 		command = ["sudo"] + command
 	}
+	println "command: ${command}"
 	def proc = command.execute(null, new File(workingPath))
 	proc.consumeProcessOutput(System.out, System.err)
 	proc.waitFor()
