@@ -8,7 +8,7 @@
 		"hostname": "morpheus-ubuntu",
 		"image_arch": "amd64",
 		"iso_checksum": "5e567024c385cc8f90c83d6763c6e4f1cd5deb6f",
-		"iso_checksum_type": "sha1",
+		"iso_checksum_type": "sha256",
 		"iso_directory": "{{env `PACKER_ISO_DIR`}}",
 		"iso_name": "ubuntu-14.04.5-server-amd64.iso",
 		"iso_path": "",
