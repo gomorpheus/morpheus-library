@@ -1,18 +1,20 @@
 #!/bin/bash
 
+#	VirtualBox
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 i386 ubuntu 16_04_6 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-18_04_2 amd64 ubuntu 18_04_2 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi centos-7_5 x86_64 centos 7_5 v1 1
 
+#	VMWare
 #	Base image example: ./build-images.sh vmware ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
 
 #	Basic image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 apache 2_4 v1
 
-baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
+baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
 ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64)
-centosbases=(centos-6_8 centos-6_9 centos-7_2 centos-7_3)
+centosbases=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5)
 oraclebases=(oel-7_3)
 redhatbases=(rhel-7_2 rhel-7_3)
 windowsbases=(windows-2012_r2)
@@ -31,7 +33,7 @@ elif ! [[ ${builders[*]} =~ "$1" ]]; then
 elif ! [[ ${baseimages[*]} =~ "$2" ]]; then
 
 #	echo "Base image $2 not recognized. Select from the following; centos-6_8, centos-7_2, centos-7_3, oracle-7_3, rhel-7_2, ubuntu-12_04, ubuntu-14_04, ubuntu-14_04_5-amd64, ubuntu-16_04_3-amd64, ubuntu-17_10-amd64, windows-2012_r2"
-	echo "Base image $2 not recognized. Select from the following; centos-6_8, centos-6_9, centos-7_2, centos-7_3, oracle-7_3, rhel-7_2, ubuntu-12_04, ubuntu-14_04, ubuntu-14_04_5, ubuntu-16_04_5, ubuntu-16_04_6, ubuntu-17_10_1, ubuntu-18_04_2, windows-2012_r2"
+	echo "Base image $2 not recognized. Select from the following; centos-6_8, centos-6_9, centos-7_2, centos-7_3, centos-7_5, oracle-7_3, rhel-7_2, ubuntu-12_04, ubuntu-14_04, ubuntu-14_04_5, ubuntu-16_04_5, ubuntu-16_04_6, ubuntu-17_10_1, ubuntu-18_04_2, windows-2012_r2"
 
 elif ! [[ ${arch[*]} =~ "$3" ]]; then
 
@@ -100,6 +102,8 @@ else
 		elif [[ "ubuntu-18_04_2" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "centos-7_3" = $BASE_IMAGE ]]; then
+			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
+		elif [[ "centos-7_5" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "centos-6_9" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
