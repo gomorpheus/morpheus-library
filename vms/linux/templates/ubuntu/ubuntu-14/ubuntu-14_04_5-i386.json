@@ -2,7 +2,7 @@
 	"_comment": "Build with `packer build -var-file=ubuntu-14_04_5-i386.json ubuntu-base.json`",
 	"base_image": "ubuntu-14_04_5",
 	"image_arch": "i386",
-	"iso_checksum": "082bce7c0a26b36e0ec37ed40caec4b5ba081a19",
+	"iso_checksum": "6071b0844ecbb8aa9a246b15c7aa20e798d42ed5b41c1b71aaea1f4283985ba4",
 	"iso_name": "ubuntu-14.04.5-server-i386.iso",
-	"iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.5-server-i386.iso"
+	"iso_url": "http://old-releases.ubuntu.com/releases/14.04.5/ubuntu-14.04.5-server-i386.iso"
 }

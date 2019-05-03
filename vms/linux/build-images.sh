@@ -8,12 +8,13 @@
 
 #	VMWare
 #	Base image example: ./build-images.sh vmware ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
+#	Base image example: ./build-images.sh vmware centos-7_5 x86_64 centos 7_5 v1 1
 
 #	Basic image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 apache 2_4 v1
 
-baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
+baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-14_04_6-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
-ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-16 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64)
+ubuntubases=(ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-14_04_6-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64)
 centosbases=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5)
 oraclebases=(oel-7_3)
 redhatbases=(rhel-7_2 rhel-7_3)
@@ -76,6 +77,8 @@ else
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-14_04_5" = $BASE_IMAGE ]]; then
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
+	elif [[ "ubuntu-14_04_6" = $BASE_IMAGE ]]; then
+		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-16_04_5" = $BASE_IMAGE ]]; then
 		BASE_OS=${BASE_IMAGE::${#BASE_IMAGE}-5}
 	elif [[ "ubuntu-16_04_6" = $BASE_IMAGE ]]; then
@@ -90,6 +93,8 @@ else
 		ARTIFACT_FOLDERNAME=$INSTANCE_TYPE-$INSTANCE_VERSION-$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 	else
 		if [[ "ubuntu-14_04_5" = $BASE_IMAGE ]]; then
+			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
+		elif [[ "ubuntu-14_04_6" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
 		elif [[ "ubuntu-16_04_3" = $BASE_IMAGE ]]; then
 			ARTIFACT_FOLDERNAME=$BASE_IMAGE-$MORPH_BUILD_VERSION-$ARCH
