@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #	VirtualBox
+#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 ubuntu 14_04_5 v1 1
+#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_6 amd64 ubuntu 14_04_6 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 i386 ubuntu 16_04_6 v1 1
 #	Base image example: ./build-images.sh virtualbox-vdi ubuntu-18_04_2 amd64 ubuntu 18_04_2 v1 1
