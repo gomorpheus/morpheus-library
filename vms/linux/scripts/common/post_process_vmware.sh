@@ -21,7 +21,8 @@ echo "tmp file: $TMP_FILE"
 
 echo "generating ovf file"
 if [ "$(uname)" == "Darwin" ]; then
-    # Do something under Mac OS X platform        
+    # Do something under Mac OS X platform
+    echo "\"/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool\"" --noImageFiles $OUTPUT_BASE_DIR/$ARTIFACT_FILENAME.vmx $OUTPUT_BASE_DIR/ovf/$ARTIFACT_FILENAME.ovf"
 	"/Applications/VMware Fusion.app/Contents/Library/VMware OVF Tool/ovftool" --noImageFiles $OUTPUT_BASE_DIR/$ARTIFACT_FILENAME.vmx $OUTPUT_BASE_DIR/ovf/$ARTIFACT_FILENAME.ovf
 	echo "ovf file generated"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
