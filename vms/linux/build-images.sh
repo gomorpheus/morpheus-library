@@ -1,18 +1,19 @@
 #!/bin/bash
 
-#	VirtualBox
-#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 ubuntu 14_04_5 v1 1
-#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_6 amd64 ubuntu 14_04_6 v1 1
-#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
-#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-16_04_6 i386 ubuntu 16_04_6 v1 1
-#	Base image example: ./build-images.sh virtualbox-vdi ubuntu-18_04_2 amd64 ubuntu 18_04_2 v1 1
-#	Base image example: ./build-images.sh virtualbox-vdi centos-7_5 x86_64 centos 7_5 v1 1
+#	VirtualBox examples
+#	./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 ubuntu 14_04_5 v1 1
+#	./build-images.sh virtualbox-vdi ubuntu-14_04_6 amd64 ubuntu 14_04_6 v1 1
+#	./build-images.sh virtualbox-vdi ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
+#	./build-images.sh virtualbox-vdi ubuntu-16_04_6 i386 ubuntu 16_04_6 v1 1
+#	./build-images.sh virtualbox-vdi ubuntu-18_04_2 amd64 ubuntu 18_04_2 v1 1
+#	./build-images.sh virtualbox-vdi centos-7_5 x86_64 centos 7_5 v1 1
 
-#	VMWare
-#	Base image example: ./build-images.sh vmware ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
-#	Base image example: ./build-images.sh vmware centos-7_5 x86_64 centos 7_5 v1 1
+#	./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 apache 2_4 v1
 
-#	Basic image example: ./build-images.sh virtualbox-vdi ubuntu-14_04_5 amd64 apache 2_4 v1
+#	VMWare examples
+#	./build-images.sh vmware ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
+#	./build-images.sh vmware centos-7_5 x86_64 centos 7_5 v1 1
+
 
 baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-14_04_6-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
@@ -283,7 +284,7 @@ else
 #		echo "$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json"
 #		PACKER_LOG=1 packer build -parallel=false -only=virtualbox-vdi -var "git_hash=$GIT_HASH" -var "morph_build_version=$MORPH_BUILD_VERSION" -var "base_image=$BASE_IMAGE" -var "image_arch=$ARCH" -var-file=$PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json $PACKER_TEMPLATE_DIR/templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json
 		
-		packerCmd="groovy ../../morpheus-library -template=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json -var-file=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json -only=virtualbox-vdi -parallel=false -var \"git_hash=$GIT_HASH\" -debug"
+		packerCmd="groovy ../../morpheus-library -template=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$PACKER_TEMPLATE_BASE_SUFFIX.json -var-file=templates/$INSTANCE_TYPE/$BASE_OS/$INSTANCE_TYPE-$INSTANCE_VERSION$PACKER_TEMPLATE_VARIABLE_SUFFIX.json -only=virtualbox-vdi -parallel=false -var \"git_hash=$GIT_HASH\""
 		echo "packerCmd = $packerCmd"
 		eval $packerCmd
 
