@@ -14,6 +14,8 @@
 #	./build-images.sh vmware ubuntu-16_04_6 amd64 ubuntu 16_04_6 v1 1
 #	./build-images.sh vmware centos-7_5 x86_64 centos 7_5 v1 1
 
+#	./build-images.sh vmware ubuntu-14_04_5 amd64 apache 2_4 v1
+
 
 baseimages=(centos-6_8 centos-6_9 centos-7_2 centos-7_3 centos-7_5 oel-7_3 rhel-7_2 rhel-7_3 ubuntu-12_04 ubuntu-14_04_3 ubuntu-14_04_5-amd64 ubuntu-14_04_6-amd64 ubuntu-16_04_4-amd64 ubuntu-16_04_5-amd64 ubuntu-16_04_6-amd64 ubuntu-17_10_1-amd64 ubuntu-18_04_2-amd64 windows-2012_r2)
 builders=(vmware virtualbox-qemu kvm amazon xen virtualbox-vdi ovm)
