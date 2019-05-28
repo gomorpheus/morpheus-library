@@ -4,7 +4,7 @@
 	"iso_checksum": "0724a468ec0c4ac46ac6a1daba0273be697a37bb7f4e9fed8ad84ad270cdee2f",
 	"iso_name": "CentOS-6.9-i386-bin-DVD1.iso",
 	"iso_path": "CentOS-6.9-i386-bin-DVD1to2",
-	"iso_url": "http://mirror.sigmanet.com/centos/6.9/isos/i386/CentOS-6.9-i386-bin-DVD1.iso",
+	"iso_url": "https://mirror.nsc.liu.se/centos-store/6.9/isos/i386/CentOS-6.9-i386-bin-DVD1.iso",
 	"virtualbox_guest_os_type": "RedHat",
 	"vmware_guest_os_type": "centos"
 }

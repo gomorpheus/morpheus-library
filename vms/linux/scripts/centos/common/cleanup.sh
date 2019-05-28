@@ -118,6 +118,10 @@ fi
 touch /var/log/wtmp
 touch /var/log/lastlog
 
+# Fix Huawei Xen Drivers
+echo "add_drivers+=\"xen-blkfront xen-netfront virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring virtio\" " >> /etc/dracut.conf
+dracut -f /boot/initramfs-3.10.0-862.3.2.el7.x86_64.img
+
 set +e
 # Zero out the rest of the free space using dd, then delete the written file.
 /sbin/swapoff -a
