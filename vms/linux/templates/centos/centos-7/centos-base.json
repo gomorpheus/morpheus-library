@@ -276,6 +276,7 @@
          "only": [
            "virtualbox-vdi",
            "vmware",
+           "kvm",
            "amazon",
            "xen"
          ]       
