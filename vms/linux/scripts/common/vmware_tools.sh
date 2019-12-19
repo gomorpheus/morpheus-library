@@ -14,9 +14,10 @@ case "$OS_RELEASE" in
 		# 	exit 0
 		# else
 		#apt-get -y install open-vm-tools 
-	  	apt-get -y install dkms
-	   	apt-get -y install nfs-common
-	   	#exit 0
+	  	apt-get -y install dkms nfs-common
+	  	if [[ "$OS_VERSION" =~ ^18 ]]; then
+	  		apt-get -y install net-tools
+	  	fi
 	  ;;
 
   centos|rhel|ol)
