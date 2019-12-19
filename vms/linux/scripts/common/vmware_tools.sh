@@ -13,10 +13,10 @@ case "$OS_RELEASE" in
 			
 		# 	exit 0
 		# else
-		apt-get -y install open-vm-tools 
+		#apt-get -y install open-vm-tools 
 	  	apt-get -y install dkms
 	   	apt-get -y install nfs-common
-	   	exit 0
+	   	#exit 0
 	  ;;
 
   centos|rhel|ol)
@@ -32,11 +32,14 @@ if [ -e /home/$USER_HOME/linux.iso ]; then
 	ISO_PATH=/home/$USER_HOME/linux.iso
 elif [ -e /root/linux.iso ]; then
 	ISO_PATH=/root/linux.iso
+elif [ -e /tmp/linux.iso ]; then
+	ISO_PATH=/tmp/linux.iso
 else
 	echo "Did not find CD image at /home/${USER_HOME}/linux.iso, check packer output to see if it was copied to VM."
 	exit 1
 fi
 
+echo "Mounting vmware tools iso at ${ISO_PATH}"
 mkdir -p /mnt/vmware
 mount -o loop "$ISO_PATH" /mnt/vmware
 cd /tmp
