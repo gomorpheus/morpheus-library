@@ -20,6 +20,7 @@
 		"packer_artifacts_directory": "{{env `PACKER_ARTIFACTS_DIR`}}",
 		"preseed": "ubuntu/18_04/preseed.cfg",
 		"preseed_cloud": "ubuntu/18_04/cloud_preseed.cfg",
+		"preseed_hyperv": "ubuntu/18_04/hyperv_preseed.cfg",
 		"preseed_xen": "ubuntu/18_04/xen_preseed.cfg",
 		"ssh_name": "cloud-user",
 		"ssh_pass": "m0rp#3us!",
@@ -271,6 +272,44 @@
 		"ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
 		"type": "xenserver-iso",
 		"vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}"
+	 },
+	 {
+		"boot_command": [
+			"<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+			"<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+			"<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+			"<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><wait>",
+			"/install/vmlinuz<wait> ",
+			"preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed_hyperv`}} ",
+			"debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+			"hostname={{user `hostname`}} ",
+			"fb=false debconf/frontend=noninteractive ",
+			"keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+			"keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+			"initrd=/install/initrd.gz -- <enter>"
+		],
+		"boot_wait": "5s",
+		"disk_size": "{{user `disk_size`}}",
+		"http_directory": "http",
+		"use_fixed_vhd_format": true,
+		"skip_compaction": true,
+		"generation": 1,
+		"iso_checksum": "{{user `iso_checksum`}}",
+		"iso_checksum_type": "{{user `iso_checksum_type`}}",
+		"iso_urls": [
+			"{{user `iso_directory`}}/{{user `iso_path`}}/{{user `iso_name`}}",
+			"{{user `iso_directory`}}/{{user `iso_name`}}",
+			"{{user `iso_url`}}"
+		],
+		"name": "hyperv",
+		"output_directory": "{{user `packer_artifacts_directory`}}/{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}/hyperv",
+		"shutdown_command": "",
+		"ssh_username": "{{user `ssh_name`}}",
+		"ssh_password": "{{user `ssh_pass`}}",
+		"ssh_timeout": "{{user `ssh_wait_timeout`}}",
+		"type": "hyperv-iso",
+		"vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
+		"shutdown_command": "sudo -S shutdown -P now"
 	 }
 	],
 	"provisioners": [
@@ -299,6 +338,7 @@
 			"amazon",
 			"kvm",
 			"xen",
+			"hyperv",
 			"virtualbox-vdi"
 		]
 	 },
