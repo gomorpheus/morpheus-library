@@ -5,7 +5,7 @@ set -e
 
 case "$OS_RELEASE" in
   ubuntu)
-	apt-get -y install xen-tools
+	apt-get -y install xe-guest-utilities
         ;;
 
   centos|rhel|ol)
