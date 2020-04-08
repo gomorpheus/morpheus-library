@@ -43,7 +43,7 @@
       "iso_checksum_type": "{{ user `iso_checksum_type` }}",
       "iso_checksum": "{{ user `iso_checksum` }}",
       "iso_url": "{{ user `iso_url` }}",
-      "memory": "{{ user `vm_memory` }}",
+      "qemuargs": [ "-m", "4096M" ],
       "output_directory": "output-{{ user `vm_name` }}-{{ build_type }}-{{ timestamp }}",
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'packer'|sudo -S bash 'shutdown.sh'",
       "ssh_password": "{{ user `ssh_pass` }}",
