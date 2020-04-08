@@ -2,16 +2,18 @@
 set -e
 . /tmp/os_detect.sh
 
+
 # Turn off DNS lookups for SSH
 echo "UseDNS no" >> /etc/ssh/sshd_config
 
-	
+echo "Running a zyper install of dependent packages"	
 zypper install -y git wget curl vim cloud-init
 	
 	
 
 
 if [[ $VAGRANT  =~ true || $VAGRANT =~ 1 || $VAGRANT =~ yes ]]; then
+	echo "Checking vagrant user"
 	mkdir -pm 700 /home/vagrant/.ssh
 	wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
 	chmod 0600 /home/vagrant/.ssh/authorized_keys
@@ -20,5 +22,6 @@ fi
 
 echo "uname -r: $(uname -r)"
 if [[ $UPDATE  =~ true || $UPDATE =~ 1 || $UPDATE =~ yes ]]; then
+	  echo "Running Update with Zypper"
 		zypper update -y
 fi
