@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash -e
 . /tmp/os_detect.sh
 
 
@@ -7,9 +7,9 @@ if [ -z "$BUILD_NAME" ]; then
   echo "No BUILD_NAME was set in environment, this should be set in Packer."
   exit 1
 else
-	if [ -z $BUILD_TIME ]; then
+	# if [ -z $BUILD_TIME ]; then
 	  BUILD_TIME=$(date -u +%FT%T%z)
-	fi
+	# fi
 	# sudo is not needed since the script is being called using sudo
 	echo "$BUILD_NAME $BUILD_TIME" > /root/morpheus.version
 	chmod 644 /root/morpheus.version
