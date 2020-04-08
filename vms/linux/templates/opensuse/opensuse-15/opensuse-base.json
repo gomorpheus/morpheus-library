@@ -194,7 +194,7 @@
            "BUILD_NAME=morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
            "GIT_HASH={{user `git_hash`}}"
          ],
-         "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+         "execute_command": "echo '{{user `ssh_pass`}}' | sudo -S bash -c '{{ .Vars }} {{ .Path }}'",
          "script": "scripts/morpheus-base/run.sh"
       },
       {
@@ -213,7 +213,7 @@
       },
       {
         "type": "shell",
-        "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+        "execute_command": "echo '{{user `ssh_pass`}}' | sudo -S bash -c '{{ .Vars }} {{ .Path }}'",
         "script": "scripts/ntp/run.sh"
       },
       {
@@ -221,7 +221,7 @@
          "environment_vars": [
             "USER_HOME={{user `ssh_name`}}"
          ],
-         "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+         "execute_command": "echo '{{user `ssh_pass`}}' | sudo -S bash -c '{{ .Vars }} {{ .Path }}'",
          "script": "scripts/common/vmware_tools.sh",
          "only": [
             "vmware"
@@ -229,7 +229,7 @@
       },
       {
          "type": "shell",
-         "execute_command": "{{.Vars}} sudo -S -E bash '{{.Path}}'",
+         "execute_command": "echo '{{user `ssh_pass`}}' | sudo -S bash -c '{{ .Vars }} {{ .Path }}'",
          "scripts": [
            "scripts/opensuse/common/cleanup.sh"
          ],
