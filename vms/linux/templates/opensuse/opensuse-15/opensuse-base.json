@@ -16,6 +16,7 @@
     "vm_ssh_username": "root",
     "ssh_name": "cloud-user",
     "ssh_pass": "m0rp#3us!",
+    "ssh_wait_timeout": "20m",
     "vm_vcpu": "1"
   },
   "builders": [
@@ -67,7 +68,7 @@
       ],
          "boot_wait": "5s",
          "disk_type_id": "0",
-         "disk_size": "{{ user `disk_size` }}",
+         "disk_size": "{{ user `vm_disk_size` }}",
          "guest_os_type": "{{ user `vmware_guest_os_type` }}",
          "headless": "{{user `headless`}}",
          "http_directory": "http",
@@ -114,7 +115,7 @@
 	        "{{ user `boot_command_prefix` }}"
 	    ],
         "boot_wait": "5s",
-        "disk_size": "{{ user `disk_size` }}",
+        "disk_size": "{{ user `vm_disk_size` }}",
         "format": "raw",
         "headless": "{{user `headless`}}",
         "http_directory": "http",
