@@ -19,12 +19,12 @@
             <log config:type="boolean">true</log>
         </messages>
         <warnings>
-            <show config:type="boolean">false</show>
+            <show config:type="boolean">true</show>
             <timeout config:type="integer">10</timeout>
             <log config:type="boolean">true</log>
         </warnings>
         <errors>
-            <show config:type="boolean">false</show>
+            <show config:type="boolean">true</show>
             <timeout config:type="integer">10</timeout>
             <log config:type="boolean">true</log>
         </errors>
