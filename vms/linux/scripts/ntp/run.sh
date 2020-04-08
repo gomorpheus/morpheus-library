@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/bash -e
 . /tmp/os_detect.sh
 
 if [ -z $RUN_AS ]; then
