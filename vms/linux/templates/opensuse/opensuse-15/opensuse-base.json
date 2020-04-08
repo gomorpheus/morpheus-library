@@ -180,7 +180,7 @@
            "VAGRANT=false",
            "UPDATE={{user `update`}}"
          ],
-         "execute_command": "echo '{{user 'ssh_pass'}}' | sudo -S bash -c '{{ .Vars }} {{ .Path }}'",
+         "execute_command": "echo '{{user `ssh_pass`}}' | sudo -S bash -c '{{ .Vars }} {{ .Path }}'",
          "script": "scripts/opensuse/common/setup.sh",
          "pause_before": "30s",
          "only": [
