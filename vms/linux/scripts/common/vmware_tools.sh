@@ -24,7 +24,10 @@ case "$OS_RELEASE" in
   	yum install dkms nfs-utils open-vm-tools -y
   	exit 0
    	;;
-
+  opensuse-leap)
+    zypper install -y open-vm-tools
+    exit 0
+    ;;
   *)
    	;;
 esac

@@ -22,6 +22,9 @@ else
 	 centos|rhel|ol)
 	  yum -y install $PACKAGES
 	  ;;
+	 opensuse-leap)
+	  zypper install -y $PACKAGES
+	  ;;
 	 *)
 	  ;;
 	esac

@@ -11,7 +11,9 @@ case "$OS_RELEASE" in
   centos|rhel|ol)
   	yum install qemu-guest-agent -y
    	;;
-
+  opensuse-leap)
+    zypper install -y qemu-guest-agent
+    ;;
   *)
    	;;
 esac
