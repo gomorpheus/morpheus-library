@@ -2,11 +2,6 @@
 set -e
 . /tmp/os_detect.sh
 
-for nic in /etc/sysconfig/network-scripts/ifcfg-eth*;
-do
-  sed -i /HWADDR/d $nic;
-  sed -i /UUID/d $nic;
-done
 
 sed 's/#PasswordAuthentication yes/PasswordAuthentication yes/' -i /etc/ssh/sshd_config
 unset HISTFILE
