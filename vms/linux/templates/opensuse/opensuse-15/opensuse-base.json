@@ -303,7 +303,7 @@
             "OUTPUT_BASE_DIR={{user `packer_artifacts_directory`}}/{{user `base_image`}}-{{ user `morph_build_version` }}-{{user `image_arch`}}/vmware",
             "ARTIFACT_FILENAME=morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}"
           ],
-          "execute_command": "{{.Vars}} sudo -S -E bash '{{.Script}}'",
+          "execute_command": "{{.Vars}} bash '{{.Script}}'",
           "script": "scripts/common/post_process_vmware.sh",
           "only": [
              "vmware"
