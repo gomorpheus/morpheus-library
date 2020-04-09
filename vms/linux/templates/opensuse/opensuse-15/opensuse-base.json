@@ -132,7 +132,7 @@
         "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
         "shutdown_command": "sudo -S halt -h -p",
         "type": "qemu",
-        "qemuargs": [ "-m", "2048M" ],
+        "qemuargs": [ "-m", "2048m" ],
         "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
         "vnc_bind_address": "{{ user `vnc_bind_address` }}"
       },
