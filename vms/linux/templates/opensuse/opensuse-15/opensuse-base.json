@@ -9,7 +9,7 @@
     "vagrant_cloud_token": "",
     "vagrant_cloud_username": "",
     "vm_disk_adapter_type": "scsi",
-    "vm_disk_size": "36864",
+    "vm_disk_size": "5120",
     "vm_memory": "2048",
     "vm_name": "",
     "vm_ssh_password": "vagrant",
@@ -132,7 +132,7 @@
         "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
         "shutdown_command": "sudo -S halt -h -p",
         "type": "qemu",
-        "qemuargs": [ "-m", "4096M" ],
+        "qemuargs": [ "-m", "2048M" ],
         "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
         "vnc_bind_address": "{{ user `vnc_bind_address` }}"
       },
