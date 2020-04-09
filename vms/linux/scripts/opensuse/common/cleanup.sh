@@ -45,62 +45,6 @@ rpmdb --rebuilddb
 rm -f /var/lib/rpm/__db*
 
 
-# if [ -f /etc/default/grub ]; then
-# 	sed -i -e 's/quiet/quiet net.ifnames=0 biosdevname=0/' /etc/default/grub
-# 	sed -i -e 's/\<rhgb\>//g' /etc/default/grub
-# 	grub2-mkconfig -o /boot/grub2/grub.cfg
-# fi
-export iface_file=$(basename "$(find /etc/sysconfig/network-scripts/ -name 'ifcfg*' -not -name 'ifcfg-lo' | head -n 1)")
-export iface_name=${iface_file:6}
-
-if [ ! $iface_file == 'ifcfg-eth0' ]; then
-	mv /etc/sysconfig/network-scripts/$iface_file /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-sed -i -e "s/$iface_name/eth0/" /etc/sysconfig/network-scripts/ifcfg-eth0
-
-
-if grep -q PEERDNS /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i "s/PEERDNS=\"\?no\"\?/PEERDNS=yes/g" /etc/sysconfig/network-scripts/ifcfg-eth0
-else
-	echo PEERDNS="yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-if grep -q NM_CONTROLLED /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i "s/NM_CONTROLLED=\"\?yes\"\?/NM_CONTROLLED=no/g" /etc/sysconfig/network-scripts/ifcfg-eth0
-else
-	echo NM_CONTROLLED="no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-if grep -q DEFROUTE /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i "s/DEFROUTE=\"\?no\"\?/DEFROUTE=yes/g" /etc/sysconfig/network-scripts/ifcfg-eth0
-else
-	echo DEFROUTE="yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-if grep -q ONBOOT /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i "s/ONBOOT=\"\?no\"\?/ONBOOT=yes/g" /etc/sysconfig/network-scripts/ifcfg-eth0
-else
-	echo ONBOOT="yes" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-if grep -q DEVICE /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i '/^DEVICE=/d' /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-echo DEVICE="eth0" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-
-if grep -q IPV6 /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i '/^IPV6/d' /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-if grep -q NETBOOT /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i '/^NETBOOT=/d' /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
-if grep -q PEERROUTES /etc/sysconfig/network-scripts/ifcfg-eth0; then
-	sed -i '/^PEERROUTES=/d' /etc/sysconfig/network-scripts/ifcfg-eth0
-fi
-
 
 
 touch /var/log/wtmp
