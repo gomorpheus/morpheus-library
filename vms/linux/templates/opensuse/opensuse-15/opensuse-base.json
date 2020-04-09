@@ -182,7 +182,7 @@
         "{{ user `boot_command_prefix` }}"
       ],
     "boot_wait": "5s",
-    "disk_size": "{{user `disk_size`}}",
+    "disk_size": "{{user `vm_disk_size`}}",
     "http_directory": "http",
     "use_fixed_vhd_format": true,
     "skip_compaction": true,
