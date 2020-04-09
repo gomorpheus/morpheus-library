@@ -17,7 +17,10 @@
     "ssh_name": "cloud-user",
     "ssh_pass": "m0rp#3us!",
     "ssh_wait_timeout": "20m",
-    "vm_vcpu": "1"
+    "vm_vcpu": "1",
+    "vnc_bind_address": "0.0.0.0",
+    "vnc_disable_password": "true",
+    "packer_artifacts_directory": "{{env `PACKER_ARTIFACTS_DIR`}}"
   },
   "builders": [
     {
@@ -84,16 +87,16 @@
          "ssh_username": "{{user `ssh_name`}}",
          "ssh_password": "{{user `ssh_pass`}}",
          "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
-         "shutdown_command": "sudo -S shutdown -P now",
+         "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now",
          "tools_upload_flavor": "linux",
          "type": "vmware-iso",
          "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
          "vmdk_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}-disk1",
          "vmx_data": {
             "mainmem.backing": "swap",
-            "memsize": "{{ user `memory` }}",
+            "memsize": "{{ user `vm_memory` }}",
             "MemTrimRate": "0",
-            "numvcpus": "{{ user `cpus` }}",
+            "numvcpus": "{{ user `vm_vcpu` }}",
             "sched.mem.pshare.enable": "FALSE"
          },
          "vnc_bind_address": "{{ user `vnc_bind_address` }}",
@@ -159,7 +162,7 @@
       "iso_url": "{{ user `iso_url` }}",
       "memory": "{{ user `vm_memory` }}",
       "output_directory": "output-{{ user `vm_name` }}-{{ build_type }}-{{ timestamp }}",
-      "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'packer'|sudo -S bash 'shutdown.sh'",
+      "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_pass` }}",
       "ssh_username": "{{ user `ssh_name` }}",
       "ssh_wait_timeout": "60m",
@@ -196,14 +199,13 @@
     ],
     "name": "hyperv",
     "output_directory": "{{user `packer_artifacts_directory`}}/{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}/hyperv",
-    "shutdown_command": "",
     "ssh_username": "{{user `ssh_name`}}",
     "ssh_password": "{{user `ssh_pass`}}",
     "ssh_timeout": "{{user `ssh_wait_timeout`}}",
     "type": "hyperv-iso",
     "memory": "{{ user `vm_memory` }}",
     "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
-    "shutdown_command": "sudo -S shutdown -P now"
+    "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now"
     }
   ],
    "provisioners": [

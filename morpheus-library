@@ -69,7 +69,7 @@ if(!options.templates) {
 	}
 	command +=  [output.canonicalPath]
 	if(options.sudo) {
-		command = ["sudo"] + command
+		command = ["sudo",'-E']  + command
 	}
 	println "command: ${command}"
 	def proc = command.execute(null, new File(workingPath))
