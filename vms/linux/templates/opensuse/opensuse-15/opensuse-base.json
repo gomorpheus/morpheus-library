@@ -87,7 +87,7 @@
          "ssh_username": "{{user `ssh_name`}}",
          "ssh_password": "{{user `ssh_pass`}}",
          "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
-         "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now",
+         "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S halt -h -p",
          "tools_upload_flavor": "linux",
          "type": "vmware-iso",
          "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
@@ -130,7 +130,7 @@
         "ssh_username": "{{user `ssh_name`}}",
         "ssh_password": "{{user `ssh_pass`}}",
         "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
-        "shutdown_command": "sudo -S shutdown -P now",
+        "shutdown_command": "sudo -S halt -h -p",
         "type": "qemu",
         "qemuargs": [ "-m", "4096M" ],
         "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
@@ -162,7 +162,7 @@
       "iso_url": "{{ user `iso_url` }}",
       "memory": "{{ user `vm_memory` }}",
       "output_directory": "output-{{ user `vm_name` }}-{{ build_type }}-{{ timestamp }}",
-      "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now",
+      "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S halt -h -p",
       "ssh_password": "{{ user `ssh_pass` }}",
       "ssh_username": "{{ user `ssh_name` }}",
       "ssh_wait_timeout": "60m",
@@ -205,7 +205,7 @@
     "type": "hyperv-iso",
     "memory": "{{ user `vm_memory` }}",
     "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
-    "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now"
+    "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S halt -h -p"
     }
   ],
    "provisioners": [
