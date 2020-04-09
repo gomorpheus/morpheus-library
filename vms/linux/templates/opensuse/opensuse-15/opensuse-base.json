@@ -50,7 +50,7 @@
       "ssh_username": "{{ user `ssh_name` }}",
       "ssh_wait_timeout": "60m",
       "type": "virtualbox-iso",
-      "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
+      "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}"
     },
           {
          "boot_command": [
