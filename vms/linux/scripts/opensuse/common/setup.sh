@@ -16,7 +16,7 @@ systemctl enable cloud-config cloud-final cloud-init-local cloud-init
 sed -i "s/^Defaults targetpw/#Defaults targetpw/" /etc/sudoers
 sed -i "s/^Defaults targetpw/#Defaults targetpw/" /etc/sudoers
 sed -i "s/^ALL   ALL=(ALL) ALL/#ALL   ALL=(ALL) ALL/" /etc/sudoers
-echo 'cloud-user   ALL=(ALL) NOPASSWD: ALL' > /target/etc/sudoers.d/cloud-user;
+echo 'cloud-user   ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/cloud-user;
 
 if [[ $VAGRANT  =~ true || $VAGRANT =~ 1 || $VAGRANT =~ yes ]]; then
 	echo "Checking vagrant user"
