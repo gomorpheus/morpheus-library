@@ -8,7 +8,7 @@ echo "UseDNS no" >> /etc/ssh/sshd_config
 
 echo "Running a zyper install of dependent packages"	
 zypper install -y git wget curl vim cloud-init
-sed -i -e 's/^After=systemd-networkd-wait-online.service/After=systemd-networkd-wait-online.service\nAfter=wicked.service\nRequires=wicked.service/g' /usr/lib/systemd/system/cloud-init.service
+# sed -i -e 's/^After=systemd-networkd-wait-online.service/After=systemd-networkd-wait-online.service\nAfter=wicked.service\nRequires=wicked.service/g' /usr/lib/systemd/system/cloud-init.service
 systemctl enable cloud-config cloud-final cloud-init-local cloud-init	
 	
 
