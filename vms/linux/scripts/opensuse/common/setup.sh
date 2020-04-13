@@ -14,7 +14,6 @@ systemctl enable cloud-config cloud-final cloud-init-local cloud-init
 
 #Fix sudoers to not prompt for root password but rather user password
 sed -i "s/^Defaults targetpw/#Defaults targetpw/" /etc/sudoers
-sed -i "s/^Defaults targetpw/#Defaults targetpw/" /etc/sudoers
 sed -i "s/^ALL   ALL=(ALL) ALL/#ALL   ALL=(ALL) ALL/" /etc/sudoers
 echo 'cloud-user   ALL=(ALL) ALL' > /etc/sudoers.d/cloud-user;
 

@@ -218,15 +218,4 @@
     <kdump>
         <add_crash_kernel config:type="boolean">false</add_crash_kernel>
     </kdump>
-    <scripts>
-        <post-scripts config:type="list">
-            <script>
-                <source>
-                    <![CDATA[
-                    reboot
-                    ]]>
-                </source>
-            </script>
-        </post-scripts>
-    </scripts>
 </profile>

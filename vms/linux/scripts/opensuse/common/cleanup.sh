@@ -45,6 +45,10 @@ rm -f /var/lib/rpm/__db*
 touch /var/log/wtmp
 touch /var/log/lastlog
 
+# Disable root password
+passwd --lock root
+passwd -d root
+
 # Fix Huawei Xen Drivers
 # echo "add_drivers+=\"xen-blkfront xen-netfront virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring virtio\" " >> /etc/dracut.conf
 # dracut -f /boot/initramfs-`uname -r`.img
