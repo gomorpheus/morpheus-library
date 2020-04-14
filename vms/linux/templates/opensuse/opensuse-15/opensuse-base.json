@@ -17,6 +17,7 @@
     "ssh_wait_timeout": "30m",
     "vm_vcpu": "1",
     "vnc_bind_address": "0.0.0.0",
+    "headless": "true",
     "vnc_disable_password": "true",
     "morph_build_version": "v1",
     "packer_artifacts_directory": "{{env `PACKER_ARTIFACTS_DIR`}}"
