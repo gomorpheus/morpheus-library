@@ -206,7 +206,7 @@
       "output_directory": "{{user `packer_artifacts_directory`}}/{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}/hyperv",
       "ssh_username": "{{user `ssh_name`}}",
       "ssh_password": "{{user `ssh_pass`}}",
-      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "ssh_timeout": "{{user `ssh_wait_timeout`}}",
       "type": "hyperv-iso",
       "memory": "{{ user `memory` }}",
       "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
