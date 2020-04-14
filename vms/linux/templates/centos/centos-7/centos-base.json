@@ -210,7 +210,7 @@
       "type": "hyperv-iso",
       "memory": "{{ user `vm_memory` }}",
       "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
-      "shutdown_command": "sudo -S shutdown -P now",
+      "shutdown_command": "sudo -S shutdown -P now"
       }
    ],
    "provisioners": [
