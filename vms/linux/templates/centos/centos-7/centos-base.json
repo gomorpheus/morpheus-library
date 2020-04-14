@@ -184,8 +184,8 @@
         "type": "xenserver-iso",
         "vm_name": "morpheus-{{user `base_image`}}-{{user `morph_build_version`}}-{{user `image_arch`}}",
         "vrdp_bind_address": "{{ user `vrdp_bind_address` }}"
-      }
-          {
+      },
+      {
      "boot_command": [
           "<tab><tab> <bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs> biosdevname=0 net.ifnames=0 text ks=http://{{ .HTTPIP }}:{{ .HTTPPort}}/centos/7/xen_ks.cfg<enter>"
       ],
