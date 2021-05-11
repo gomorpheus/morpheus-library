@@ -1,0 +1,5 @@
+{
+  "_comment": "Build with `packer build -var-file=kubernetes-1_20.json kubernetes-base.json`",
+  "image_name": "kubernetes-1_20_2",
+  "kube_version": "1.20.2-00"
+}
