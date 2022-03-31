@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: morpheus-agent
+  namespace: morpheus
+  labels:
+    k8s-app: morpheus-agent
+spec:
+  selector:
+    matchLabels:
+      name: morpheus-agent
+  template:
+    metadata:
+      labels:
+        name: morpheus-agent
+    spec:
+      tolerations:
+      # this toleration is to have the daemonset runnable on master nodes
+      # remove it if your masters can't run pods
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: morpheus-agent
+        image: harbor.wheeler.house/morpheus/morpheus-agent:v2.2.2
+        resources:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 32Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log

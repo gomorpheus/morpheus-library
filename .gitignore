@@ -3,3 +3,5 @@ packer_cache
 output
 /config.json
 **/template.json
+/config
+
