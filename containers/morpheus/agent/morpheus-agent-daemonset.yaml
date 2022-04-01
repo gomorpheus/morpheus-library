@@ -22,7 +22,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: morpheus-agent
-        image: harbor.wheeler.house/morpheus/morpheus-agent:v2.2.2
+        image: harbor.wheeler.house/morpheus/morpheus-agent:v2.2.2-amd64
         resources:
           limits:
             memory: 128Mi

@@ -13,6 +13,9 @@ if [ "$1" = 'java' ]; then
 	else
 		JAVA_STARTUP="$JAVA_STARTUP $AGENT_CONFIG"
 	fi
+	#show what were doing
+	echo "agent startup: $JAVA_STARTUP"
+	#run the jar
 	java -Xms$JVM_MIN_MEM -Xmx$JVM_MAX_MEM $JAVA_STARTUP 
 fi
 
