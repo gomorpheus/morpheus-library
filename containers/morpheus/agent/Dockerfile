@@ -1,4 +1,5 @@
-FROM openjdk:16
+FROM amazoncorretto:17
+
 MAINTAINER Morpheus <docker@morpheusdata.com>
 
 # Exposed ENV
